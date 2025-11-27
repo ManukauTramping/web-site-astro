@@ -1,0 +1,20 @@
+---
+import { contentfulClient, PageContentTypeId, DropdownMenuContentTypeId } from "../lib/contentful.ts";
+import type { Page, DropdownMenu } from "../lib/contentful.ts";
+import BulmaNavbar from "./bulmaNavbar.tsx";
+
+const pages = await contentfulClient.withoutUnresolvableLinks.getEntries<Page>({
+  content_type: PageContentTypeId,
+  'fields.menuItemOrder[gt]': 0,
+  order: ['fields.menuItemOrder'],
+  select: ['fields.slug','fields.name'],
+});
+
+const dropdownMenus = await contentfulClient.withoutUnresolvableLinks.getEntries<DropdownMenu>({
+  content_type: DropdownMenuContentTypeId,
+  'fields.order[gt]': 0,
+  order: ['fields.order'],
+  select: ['fields.title', 'fields.childPages'],
+});
+---
+<BulmaNavbar pages={pages} dropdownMenus={dropdownMenus} client:load />

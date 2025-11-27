@@ -1,0 +1,17 @@
+---
+import { contentfulClient, TripContentTypeId } from "../lib/contentful.ts";
+import type { Trip } from "../lib/contentful.ts";
+import TripDisplay from "./tripDisplay.tsx";
+
+const trips = await contentfulClient.withoutUnresolvableLinks.getEntries<Trip>({
+  content_type: TripContentTypeId,
+  'fields.terrainDifficulty[exists]': true,
+  'fields.tripDate[gte]': '2025-11-01T00:00:00.000Z',//import.meta.env.PLANNED_TRIPS_START_DATE,
+  order: ['fields.tripDate'],
+  include: 2,
+  limit: 200,
+});
+
+const daysOfWeek: number[] | null = Astro.props.daysOfWeek;
+---
+<TripDisplay trips={trips} daysOfWeek={daysOfWeek} client:load />

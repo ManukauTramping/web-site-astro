@@ -1,0 +1,126 @@
+@charset "utf-8";
+
+$primary-color: #2980b9;
+$secondary-color: #6dd5fa;
+
+$site-background-hue: 195;
+$site-background-saturation: 70%;
+$site-background-luminance: 70%;
+
+$site-background-color: hsla($site-background-hue, $site-background-saturation, $site-background-luminance, 0.85);
+
+$body-font-size: 0.9em;
+
+$dimensions: 512;
+
+$table-background-color: hsl(142, 52%, 96%);
+
+@import 'bulma/bulma.sass';
+
+.is-left-text-aligned {
+	text-align: left;
+}
+
+.is-full-height {
+	height: 100vh;
+}
+
+.link-color {
+	color: hsla(269, 84%, 26%, 1);
+	font-weight: bold;
+}
+
+.link-color:hover {
+	font-style: italic;
+}
+
+.floating-element {
+	float: left;
+	width: 50%;
+	margin-right: 20px;
+}
+
+.photolink-text:hover {
+	font-style: italic;
+}
+
+.has-background-translucent {
+	background-color: $site-background-color;
+}
+
+.has-background-footer {
+	background-color: hsla($site-background-hue, $site-background-saturation, $site-background-luminance, 1);
+}
+
+.background-section {
+	width: 100%;
+	height: 100%;
+	min-height: 100vh;
+	background-position: top left;
+	background-repeat: repeat;
+	background-size: contain;
+	background-attachment: fixed;
+	padding-top: 3.25rem;
+	background-color: $site-background-color;
+}
+
+.gradientBg {
+	display: flex;
+	background: linear-gradient(to right, $primary-color, $secondary-color);
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sticky-footer-layout {
+	min-height: 92vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.footer {
+	clear: both;
+	display: flex;
+	padding: 1.5rem 1.5rem;
+	line-height: 1.5rem;
+	a {
+		border-bottom: 1px solid;
+		color: black;
+	}
+	a:hover {
+		color: $secondary-color;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.is-displayed-tablet-only {
+		display: none !important;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.is-displayed-tablet-only {
+		display: none !important;
+	}
+}
+
+@media screen and (max-width: 1023px) {
+	.is-displayed-desktop-only {
+		display: none !important;
+	}
+}
+
+@media screen and (min-width: 1216px) {
+	.is-displayed-desktop-only {
+		display: none !important;
+	}
+}
+
+@media screen and (max-width: 1215px) {
+	.is-displayed-widescreen {
+		display: none !important;
+	}
+}

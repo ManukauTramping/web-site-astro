@@ -1,0 +1,30 @@
+---
+import Image from "astro/components/Image.astro";
+import type { Entry } from "contentful";
+import type { PhotoLink } from "../lib/contentful.ts";
+
+const photoLinks: Entry<PhotoLink, "WITHOUT_UNRESOLVABLE_LINKS", string>[] = Astro.props.photoLinks;
+const photos = photoLinks.map(photoLink => {
+  return {
+    slug: photoLink.fields.page !== undefined ? photoLink.fields.page.fields.slug : '',
+    caption: photoLink.fields.caption,
+    url: photoLink.fields.photo !== undefined && photoLink.fields.photo.fields.file?.url !== undefined
+      ? `https:${photoLink.fields.photo.fields.file.url}`
+      : '',
+  }
+});
+---
+<div class={'columns is-multiline'}>
+  {photos.map(photo =>
+    <div class='column is-half-tablet is-one-quarter-desktop'>
+      <a href={`/${photo.slug}`}>
+        <div class='is-relative'>
+          <Image src={photo.url} alt={photo.caption} width={800} height={500} />
+          <div class='is-size-3 has-text-centered has-text-white is-overlay photolink-text'>
+            {photo.caption}
+          </div>
+        </div>
+      </a>
+    </div>
+  )}
+</div>

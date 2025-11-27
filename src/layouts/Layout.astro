@@ -1,0 +1,56 @@
+---
+import { ClientRouter } from "astro:transitions";
+// import { pwaInfo } from 'virtual:pwa-info';
+import {siteMetadata} from "../data/siteMetadata";
+import Navbar from "../components/navbar.astro";
+import "../components/style.scss";
+---
+<!doctype html>
+<html lang="en" class='has-navbar-fixed-top'>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=5"
+    />
+    <meta name="description" content={siteMetadata.description} />
+    <meta name="keywords" content={siteMetadata.keywords} />
+    <link rel="icon" type="image/svg+xml" href="/hiking.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{siteMetadata.title}</title>
+    <meta itemprop="name" content={siteMetadata.author} />
+    <meta itemprop="description" content={siteMetadata.description} />
+    {/*<meta itemprop="image" content={data.site.siteMetadata.imageUrl} />*/}
+    <ClientRouter />
+    <!--{ pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }-->
+  </head>
+  <body>
+    <div class='sticky-footer-layout'>
+      <header>
+        <Navbar client:load transition:persist />
+      </header>
+      <section class="section has-background-success-light">
+        <slot />
+      </section>
+      <footer class="footer center has-background-info-dark has-text-light" transition:persist>
+        <div class="content has-text-centered is-size-7">
+          Copyright 2025, {siteMetadata.author}<br/>
+          Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  section,
+  footer {
+    flex-grow: 1;
+  }
+</style>
