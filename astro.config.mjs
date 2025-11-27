@@ -24,7 +24,6 @@ export default defineConfig({
     prefetchAll: true,
   },
   redirects: {
-    '/': '/index',
   },
   site: 'https://www.manukautrampingclub.co.nz',
 });
