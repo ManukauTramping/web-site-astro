@@ -1,0 +1,17 @@
+---
+import { contentfulClient, TripContentTypeId } from "../lib/contentful.ts";
+import type { Trip } from "../lib/contentful.ts";
+import Layout from "../layouts/Layout.astro";
+import TripDisplay from "../components/tripDisplay.tsx";
+
+const trips = await contentfulClient.withoutUnresolvableLinks.getEntries<Trip>({
+  content_type: TripContentTypeId,
+  'fields.description[exists]': true,
+  order: ['-fields.tripDate'],
+  include: 2,
+  limit: 1000,
+});
+---
+<Layout>
+  <TripDisplay trips={trips} historical={true} client:load />
+</Layout>

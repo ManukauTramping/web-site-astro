@@ -1,0 +1,60 @@
+---
+import { contentfulClient, PageContentTypeId } from "../lib/contentful.ts";
+import type { Page } from "../lib/contentful.ts";
+import Layout from '../layouts/Layout.astro';
+import PhotoLinks from '../components/photoLinks.astro';
+import PlannedTripQuery from '../components/plannedTripQuery.astro';
+import RichTextDisplay from '../components/richTextDisplay.tsx';
+import PhotoCarousel from "../components/photoCarousel.astro";
+
+export async function getStaticPaths() {
+  const pages = await contentfulClient.withoutUnresolvableLinks.getEntries<Page>({
+    content_type: PageContentTypeId,
+    select: [
+      'fields.slug',
+      'fields.content',
+      'fields.photoCarousel',
+      'fields.photoLinks',
+      'fields.includedList',
+    ],
+    include: 4,
+  });
+
+  return pages.items.map(page => ({
+    params: {
+      slug: page.fields.slug === '/'
+        ? 'index'
+        : page.fields.slug,
+    },
+    props: {
+      content: page.fields.content,
+      photoLinks: page.fields.photoLinks,
+      photoCarousel: page.fields.photoCarousel,
+      includeTrips: page.fields.includedList === 'Trips',
+    },
+  }));
+}
+
+const { content, photoLinks, photoCarousel, includeTrips} = Astro.props;
+
+const carouselImages = photoCarousel === undefined
+  ? undefined
+  : photoCarousel
+      .filter(photo => photo !== undefined)
+      .map(photo => {
+        return {
+          title: photo.fields.title !== undefined ? photo.fields.title : '',
+          url: photo.fields.file !== undefined ? `https:${photo.fields.file.url}` : '',
+        }
+      })
+---
+  <Layout>
+    <section class="content p-3 is-size-6">
+      <article class="is-clearfix pb-5">
+        {carouselImages && <PhotoCarousel images={carouselImages} />}
+        <RichTextDisplay richText={content} />
+      </article>
+      {photoLinks && <PhotoLinks photoLinks={photoLinks.filter(link => link !== undefined)}/>}
+      {includeTrips && <PlannedTripQuery daysOfWeek={null} />}
+    </section>
+  </Layout>

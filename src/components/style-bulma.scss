@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+@use './style-variables.scss';
+
+$primary-color: hsl(204, 64%, 44%);
+
+@use 'bulma/sass' with (
+  $primary: $primary-color,
+
+  $body-font-size: 0.9em,
+
+  $dimensions: 512,
+
+  $table-background-color: hsl(142, 52%, 96%),
+);
