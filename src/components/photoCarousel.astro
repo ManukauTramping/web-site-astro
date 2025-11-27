@@ -15,10 +15,17 @@ const carouselImages: { title: string, url: string }[] = Astro.props.images;
   }}>
     <SwiperWrapper>
       {carouselImages.map(image =>
-        <SwiperSlide>
-          <Image src={image.url} alt={image.title} width={800} height={500} />
-        </SwiperSlide>)
-      }
+        <SwiperSlide class='image is-16by9'>
+          <Image
+            src={image.url}
+            alt={image.title}
+            priority
+            layout='constrained'
+            fit='cover'
+            inferSize={true}
+          />
+        </SwiperSlide>
+      )}
     </SwiperWrapper>
   </Swiper>
 </div>

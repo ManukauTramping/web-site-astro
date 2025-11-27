@@ -8,6 +8,7 @@ export default defineConfig({
   image: {
     domains: ['images.ctfassets.net'],
     remotePatterns: [{ protocol: "https" }],
+    responsiveStyles: true,
   },
   integrations: [
     // AstroPWA({
@@ -22,8 +23,6 @@ export default defineConfig({
   output: 'static',
   prefetch: {
     prefetchAll: true,
-  },
-  redirects: {
   },
   site: 'https://www.manukautrampingclub.co.nz',
 });
