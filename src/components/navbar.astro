@@ -17,4 +17,4 @@ const dropdownMenus = await contentfulClient.withoutUnresolvableLinks.getEntries
   select: ['fields.title', 'fields.childPages'],
 });
 ---
-<BulmaNavbar pages={pages} dropdownMenus={dropdownMenus} client:load />
+<BulmaNavbar pages={pages} dropdownMenus={dropdownMenus} client:load transition:persist />

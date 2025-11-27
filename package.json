@@ -16,7 +16,7 @@
     "@contentful/rich-text-types": "^17.2.5",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
-    "astro": "^5.15.9",
+    "astro": "^5.16.1",
     "astro-navbar": "^2.4.0",
     "astro-swiper": "^1.1.0",
     "bulma": "^0.9.4",
