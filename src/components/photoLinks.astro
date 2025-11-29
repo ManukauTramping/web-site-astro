@@ -19,7 +19,14 @@ const photos = photoLinks.map(photoLink => {
     <div class='column is-half-tablet is-one-quarter-desktop'>
       <a href={`/${photo.slug}`}>
         <div class='is-relative'>
-          <Image src={photo.url} alt={photo.caption} width={800} height={500} />
+          <Image
+            src={photo.url}
+            alt={photo.caption}
+            layout='constrained'
+            fit='cover'
+            width={800}
+            height={500}
+          />
           <div class='is-size-3 has-text-centered has-text-white is-overlay photolink-text'>
             {photo.caption}
           </div>
