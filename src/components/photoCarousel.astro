@@ -19,7 +19,6 @@ const carouselImages: { title: string, url: string }[] = Astro.props.images;
           <Image
             src={image.url}
             alt={image.title}
-            priority
             layout='constrained'
             fit='cover'
             inferSize={true}
