@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
-//import AstroPWA from '@vite-pwa/astro';
+import AstroPWA from '@vite-pwa/astro';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,11 +11,50 @@ export default defineConfig({
     responsiveStyles: true,
   },
   integrations: [
-    // AstroPWA({
-    //   devOptions: {
-    //     enabled: true,
-    //   }
-    // }),
+    AstroPWA({
+      mode: 'production',
+      base: '/',
+      scope: '/',
+      includeAssets: ['favicon.ico'],
+      registerType: 'autoUpdate',
+      manifest: {
+        name: 'Manukau Tramping Club',
+        short_name: 'MTC',
+        theme_color: '#7dcde8',
+        icons: [
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable',
+          },
+        ],
+      },
+      workbox: {
+        // raise to 4 MiB so trip-history/index.html (3.22 MB) will be precached
+        // maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+        globIgnores: ['**/trip-history/**'],
+        navigateFallback: '/404',
+        globPatterns: ['**/*.{css,js,html,svg,png,ico,txt}'],
+      },
+      devOptions: {
+        enabled: true,
+        navigateFallbackAllowlist: [/^\/$/],
+      },
+      experimental: {
+        directoryAndTrailingSlashHandler: true,
+      },
+    }),
     react({
       experimentalReactChildren: true,
     })

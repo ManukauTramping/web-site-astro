@@ -12,6 +12,10 @@
     "jsxImportSource": "react",
     "verifyDefaultProps": true,
     "@components/*": ["./src/components/*"],
-    "@layouts/*": ["./src/layouts/*"]
+    "@layouts/*": ["./src/layouts/*"],
+    "types": [
+      "vite-plugin-pwa/vanillajs",
+      "vite-plugin-pwa/info",
+    ],
   }
 }
