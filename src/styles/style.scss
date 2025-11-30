@@ -17,6 +17,10 @@ $table-background-color: hsl(142, 52%, 96%);
 
 @import 'bulma/bulma.sass';
 
+.horizontal-line {
+  border-top: 1.5px solid hsl(0, 0%, 0%);
+}
+
 .is-left-text-aligned {
 	text-align: left;
 }

@@ -1,6 +1,6 @@
 import React from "react"
 import { documentToReactComponents, type Options } from "@contentful/rich-text-react-renderer";
-import { INLINES, helpers, type Document } from "@contentful/rich-text-types"
+import {INLINES, helpers, type Document, MARKS, BLOCKS} from "@contentful/rich-text-types"
 import MediaLink from "./mediaLink"
 import AssetLink from "./assetLink"
 
@@ -34,6 +34,8 @@ const RichTextDisplay = ({ richText }: Props) => {
         // else
         return []; //documentToReactComponents(node.content)
       },
+
+      [BLOCKS.HR]: (node, children) => <hr className={'horizontal-line'} />,
     },
   }
 

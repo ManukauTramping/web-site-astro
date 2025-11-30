@@ -8,7 +8,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "generate-pwa-assets": "pwa-assets-generator",
-    "build-bulma": "sass --load-path=node_modules src/components/style-bulma.scss src/components/style-bulma.css"
+    "build-bulma": "sass --load-path=node_modules src/styles/style-bulma.scss src/components/style-bulma.css"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
