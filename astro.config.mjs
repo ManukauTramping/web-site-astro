@@ -41,6 +41,8 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // raise to 4 MiB so trip-history/index.html (3.22 MB) will be precached
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         navigateFallback: '/404',
         globPatterns: ['**/*.{css,js,html,svg,png,ico,txt}'],
       },
