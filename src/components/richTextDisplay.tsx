@@ -1,8 +1,8 @@
 import React from "react"
 import { documentToReactComponents, type Options } from "@contentful/rich-text-react-renderer";
-import {INLINES, helpers, type Document, MARKS, BLOCKS} from "@contentful/rich-text-types"
-import MediaLink from "./mediaLink"
-import AssetLink from "./assetLink"
+import { INLINES, BLOCKS, helpers } from "@contentful/rich-text-types";
+import type { Document, Inline, Block, Link } from "@contentful/rich-text-types";
+import AssetLink from "./assetLink.js";
 
 interface Props { richText: Document }
 
@@ -10,14 +10,10 @@ const RichTextDisplay = ({ richText }: Props) => {
 
   const options: Options = {
     renderNode: {
-      [INLINES.ASSET_HYPERLINK]: (node, children) => {
-        const target = node.data.target
-        return target.fields
-          ? <MediaLink file={target.fields.file['en-NZ']} content={node.content[0]} />
-          : <AssetLink id={target.sys.id} content={node.content[0]} />
-      },
+      [INLINES.ASSET_HYPERLINK]: (node, children) =>
+        <AssetLink target={node.data.target} content={node.content[0]} />,
 
-      [INLINES.HYPERLINK]: (node, children) => {
+      [INLINES.HYPERLINK]: (node) => {
         const uri: string = node.data.uri.toString();
         const name = helpers.isText(node.content[0]) ? node.content[0].value : '';   //documentToReactComponents(node.content, {})
         return <a href={uri} key={uri} className={'link-color'}>{name}</a>
