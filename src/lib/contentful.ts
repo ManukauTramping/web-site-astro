@@ -65,6 +65,10 @@ export interface Trip {
 
 export const contentfulClient = contentful.createClient({
     space: import.meta.env.CONTENTFUL_SPACE_ID!,
-    accessToken: import.meta.env.CONTENTFUL_DELIVERY_TOKEN!,
-    host: "cdn.contentful.com",
+    accessToken: import.meta.env.CONTENTFUL_USE_PREVIEW_API
+      ? import.meta.env.CONTENTFUL_PREVIEW_TOKEN!
+      : import.meta.env.CONTENTFUL_DELIVERY_TOKEN!,
+    host: import.meta.env.CONTENTFUL_USE_PREVIEW_API
+      ? import.meta.env.CONTENTFUL_PREVIEW_API
+      : "cdn.contentful.com",
 });
