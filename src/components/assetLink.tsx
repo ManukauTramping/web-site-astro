@@ -4,7 +4,7 @@ import { contentfulClient } from "../lib/contentful.ts";
 
 interface Props {
   target: Link<'Asset'>,
-  content: Block | Inline | Text,
+  content: string,
 }
 
 const AssetLink = async ({ target, content } : Props) => {
@@ -19,7 +19,7 @@ const AssetLink = async ({ target, content } : Props) => {
     file.contentType.startsWith('image')
       ? <img
           src={file.url}
-          alt={content.toString()}
+          alt={content}
           decoding={'async'}
           loading={'lazy'}
           height={file.details.image?.height}
