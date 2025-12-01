@@ -1,8 +1,8 @@
-import React, { type ReactNode } from "react"
+import React from "react"
 import { documentToReactComponents, type Options } from "@contentful/rich-text-react-renderer";
 import { INLINES, BLOCKS, helpers } from "@contentful/rich-text-types";
 import type { Document } from "@contentful/rich-text-types";
-import AssetLink from "./assetLink.js";
+import MediaLink from "./mediaLink.tsx";
 import EntryLink from "./entryLink.tsx";
 
 interface Props { richText: Document }
@@ -18,10 +18,10 @@ const RichTextDisplay = ({ richText }: Props) => {
       },
 
       [INLINES.ASSET_HYPERLINK]: (node, children) =>
-        <AssetLink target={node.data.target} content={node.content[0].toString()} />,
+        <MediaLink target={node.data.target} content={node.content[0].toString()} />,
 
       [BLOCKS.EMBEDDED_ASSET]: (node, children) =>
-        <AssetLink target={node.data.target} content={''} />,
+        <MediaLink target={node.data.target} content={''} />,
 
       [INLINES.ENTRY_HYPERLINK]: (node) =>
         <EntryLink target={node.data.target} />,
